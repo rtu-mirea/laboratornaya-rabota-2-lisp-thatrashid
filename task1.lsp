@@ -10,25 +10,24 @@
         (push newelem (cdr (nthcdr (- id 1) lst))))
     lst)
   
-(addElem (78 23 9 32 1 66) 0 55)
+(addElem (list 78 23 9 32 1 66) 0 55)
 
 ;; Delete
 
 (defun deleteElem(lst id)
     (append (subseq lst 0 id) (nthcdr (+ id 1) lst)))
   
-(deleteElem (78 23 9 32 1 66) 0)
+(deleteElem (list 78 23 9 32 1 66) 0)
 
 ;; Find
 
-(defun findElem (lst elem)
-    (setq i 0)
-    (setq elements '())
-    (loop for x in lst
-        do (setq i (+ i 1))
-        do (if (= to-find x)
-                (setq elem (append elem (list i))))
-        )
-    elem)
 
-(print (findElem '(78 23 9 32 1 66) 9))
+(defun findElem (e lst)
+	(let ((n nil) (a -1))
+		(dolist (i lst n)
+			(setq a (+ a 1))
+			(when (eq i e)
+				(return a))
+    )))
+
+(findElem `76 `(list 78 23 9 32 1 66))
