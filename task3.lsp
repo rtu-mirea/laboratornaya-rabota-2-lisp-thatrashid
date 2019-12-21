@@ -7,13 +7,15 @@
 )
 
 
-(defun decompress(lst)
-  (loop for elem in lst
-    if (integerp elem) collect elem
-    if (listp elem) nconc (make-list (car elem) 
-  :initial-elem (cadr elem))))
+(defun uncompress (lst &optional (c 0))
+  (cond
+    ((null lst) nil)
+    ((atom (car lst)) (cons (car lst) (uncompress (cdr lst))))
+    ((if (< c (cadar lst))
+         (cons (caar lst) (uncompress lst (1+ c)))
+         (uncompress (cdr lst))))))
 
 
 (print (compress (list 19 19 19 25 25 25 32 32 32 44 54 66 70 70 70)))
 
-(print (decompress (list (list 11 41) 9 10 (list 33 15) (list 75 27))))
+(print (uncompress (list (list 11 41) 9 10 (list 33 15) (list 75 27))))
